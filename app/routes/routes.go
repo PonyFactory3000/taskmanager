@@ -110,6 +110,53 @@ func (_ tApp) Index(
 }
 
 
+type tCEmployee struct {}
+var CEmployee tCEmployee
+
+
+func (_ tCEmployee) BdConnOpen(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.BdConnOpen", args).URL
+}
+
+func (_ tCEmployee) BdConnClose(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.BdConnClose", args).URL
+}
+
+func (_ tCEmployee) GetAll(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.GetAll", args).URL
+}
+
+func (_ tCEmployee) Add(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.Add", args).URL
+}
+
+func (_ tCEmployee) Change(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.Change", args).URL
+}
+
+func (_ tCEmployee) Delete(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CEmployee.Delete", args).URL
+}
+
+
 type tCProject struct {}
 var CProject tCProject
 

@@ -25,11 +25,11 @@ GET     /                                       App.Index
     DELETE     /project/:projectId/task/:id        CTask.Delete
 
 
-#   GET        /employee                           CEmployee.GetAll
+    GET        /employee                           CEmployee.GetAll
 #   GET        /employee/:id                       CEmployee.GetById
-#   PUT        /employee                           CEmployee.Add
-#   POST       /employee/:id                       CEmployee.Change
-#   DELETE     /employee/:id                       CEmployee.Delete
+    PUT        /employee                           CEmployee.Add
+    POST       /employee/:id                       CEmployee.Change
+    DELETE     /employee/:id                       CEmployee.Delete
 
 
 #   GET        /group/:id                          CGroup.GetById

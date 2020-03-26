@@ -2,7 +2,8 @@ package controllers
 
 import (
 	"taskmanager/app/models/providers/Employee"
-	//"taskmanager/app/models/entity"
+	"taskmanager/app/models/entity"
+	"taskmanager/app/helpers"
 	
 	"fmt"
 	// "log"
@@ -45,3 +46,49 @@ func (c *CEmployee) BdConnClose() revel.Result {
 	c.db.Close()
 	return nil
 }
+
+//получить список сотрудников
+func (c *CEmployee) GetAll() revel.Result {
+	fmt.Println("CEmployee.GetAll")
+
+	employeeList, _ := c.provider.GetAll()
+
+	return c.RenderJSON(helpers.Success(&employeeList))
+}
+
+//добавить сотрудника
+func (c* CEmployee) Add() revel.Result {
+	fmt.Println("CEmployee.Add")
+
+	employee := entity.Employee{}
+	c.Params.BindJSON(&employee)
+	fmt.Println(employee)
+
+	c.provider.Add(&employee)
+
+	return c.RenderJSON(helpers.Success(&employee))
+}
+
+//изменить сотрудника
+func (c* CEmployee) Change() revel.Result {
+	fmt.Println("CEmployee.Change")
+
+	employee := entity.Employee{}
+	c.Params.BindJSON(&employee)
+	fmt.Println(employee)
+
+	c.provider.Change(&employee)
+
+	return c.RenderJSON(helpers.Success(&employee))
+}
+
+//удалить сотрудника
+func (c* CEmployee) Delete() revel.Result {
+	fmt.Println("CEmployee.Delete")
+
+	id := c.Params.Route.Get("id")
+	c.provider.Delete(id)
+
+	return c.RenderJSON(helpers.Success(id))
+}
+

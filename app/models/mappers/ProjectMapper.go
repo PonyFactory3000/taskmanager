@@ -23,7 +23,7 @@ func (m *ProjectMapper) GetAll() (*[]entity.Project, error) {
 
 	projects := []entity.Project{}
 
-	script := `SELECT * FROM public.t_projects;`
+	script := `select * from public.t_projects;`
 	fmt.Println("script", script)
 
 	//получение данных из базы
@@ -56,10 +56,10 @@ func (m *ProjectMapper) GetAll() (*[]entity.Project, error) {
 func (m *ProjectMapper) Add (project *entity.Project) error {
 	fmt.Println("ProjectMapper.Add ", project)
 
-	script := `INSERT INTO public.t_projects(
-		"name", "description")
-		VALUES ($1, $2)
-		RETURNING "id";`
+	script :=	`insert into public.t_projects(
+				"name", "description")
+				values ($1, $2)
+				returning "id";`
 	fmt.Println("script", script)
 
 	data, err := m.db.Query(script, project.Name, project.Description)
@@ -84,9 +84,9 @@ func (m *ProjectMapper) Add (project *entity.Project) error {
 func (m *ProjectMapper) Change (project *entity.Project) error {
 	fmt.Println("ProjectMapper.Change ", project)
 
-	script := `UPDATE public.t_projects
-	SET "name"=$1, "description"=$2
-	WHERE "id"=$3;`
+	script :=	`update public.t_projects
+				set "name"=$1, "description"=$2
+				where "id"=$3;`
 	fmt.Println("script ", script)
 
 	_, err := m.db.Exec(script, project.Name, project.Description, project.Id)
@@ -102,8 +102,8 @@ func (m *ProjectMapper) Change (project *entity.Project) error {
 func (m *ProjectMapper) Delete (id string) error {
 	fmt.Println("ProjectMapper.Delete ", id)
 
-	script := `DELETE FROM public.t_projects
-	WHERE "id" = $1;`
+	script :=	`delete FROM public.t_projects
+				where "id" = $1;`
 	fmt.Println("script", script)
 
 	_, err := m.db.Exec(script, id)
