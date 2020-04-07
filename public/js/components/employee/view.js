@@ -3,7 +3,7 @@ let employeeListWindow = {
     //показать окно
     show () {
         webix.ui({
-            id: 'employeesListWindow',
+            id: 'employeeListWindow',
             view: 'window', modal: true, move: true,
             position: 'center', width: 700, height: 600,
             head:{
@@ -13,7 +13,7 @@ let employeeListWindow = {
                         click:function(){ employeeComponent.GetAll() }
                     },
                     {view:"button", label: 'закрыть', width: 100, align: 'right',
-                        click:function(){ $$('employeesListWindow').close(); }
+                        click:function(){ $$('employeeListWindow').close(); }
                     }
                 ]
             },
@@ -35,9 +35,9 @@ let employeeListWindow = {
                                 }
                             },
                             {view: 'button', id: 'employeeDeleteButton', value: 'удалить',
-                            click: function() {
-                                employeeComponent.Delete()
-                            }
+                                click: function() {
+                                    employeeComponent.Delete()
+                                }
                             },
                         ]
                     },
@@ -50,7 +50,7 @@ let employeeListWindow = {
                             {id: "Id", adjust: true, fillspace: true,},
                             {id: "Name", adjust: true, fillspace: true},
                             {id: "Surname", adjust: true, fillspace: true},
-                            {id: "Age", adjust: true, fillspace: true},
+                            // deleted {id: "Age", adjust: true, fillspace: true},
                             {id: "Post", adjust: true, fillspace: true},
                         ]
                     },
@@ -80,7 +80,7 @@ let employeeChangeWindow = {
                     {view: 'text', label: 'id', name: 'Id', hidden: true},
                     {view: 'text', label: 'name', name: 'Name'},
                     {view: 'text', label: 'surname', name: 'Surname'},
-                    {view: 'text', label: 'age', name: 'Age'},
+                    // deleted {view: 'text', label: 'age', name: 'Age'},
                     {view: 'text', label: 'post', name: 'Post'},
                     { margin:5, cols:[
                         { id: 'employeeAddFormButton', view:"button", value:"добавить", hidden: true,
@@ -115,7 +115,7 @@ let employeeChangeWindow = {
                 Id: values.Id,
                 Name: values.Name,
                 Surname: values.Surname,
-                Age: values.Age,
+                // deleted Age: values.Age,
                 Post: values.Post,
             })
         }

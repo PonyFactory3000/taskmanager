@@ -1,7 +1,7 @@
 -- удаление таблиц бд
 
-DROP TABLE t_tasks;
-DROP TABLE t_projects;
-DROP TABLE t_ref_status;
-DROP TABLE t_employee;
-DROP TABLE t_project_employee;
+DROP TABLE t_tasks CASCADE;
+DROP TABLE t_projects CASCADE;
+DROP TABLE t_ref_status CASCADE;
+DROP TABLE t_employee CASCADE;
+DROP TABLE t_project_employee CASCADE;

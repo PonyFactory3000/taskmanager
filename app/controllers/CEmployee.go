@@ -29,7 +29,7 @@ func init() {
 //подключение к базе
 func (c *CEmployee) BdConnOpen() revel.Result {
 	fmt.Println("BdConnCreate")
-	connStr := "host=localhost port=5432 user=postgres password=123 dbname=testDatabase sslmode=disable"
+	connStr := "host=localhost port=5432 user=postgres password=123 dbname=taskmanager sslmode=disable"
 	var err error
 	c.db, err = sql.Open("postgres", connStr)
 	if err != nil {

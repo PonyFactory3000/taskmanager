@@ -30,7 +30,7 @@ employeeComponent = {
         console.log('employeeChange')
         values = $$('employeeChangeForm').getValues()
         values.Id = parseInt(values.Id)
-        values.Age = parseInt(values.Age)
+        // deleted values.Age = parseInt(values.Age)
         console.log('values ',values)
         employeeModel.Change(values).then(result => {
             console.log(result)

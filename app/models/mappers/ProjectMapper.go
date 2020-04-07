@@ -57,9 +57,9 @@ func (m *ProjectMapper) Add (project *entity.Project) error {
 	fmt.Println("ProjectMapper.Add ", project)
 
 	script :=	`insert into public.t_projects(
-				"name", "description")
+				c_name, c_description)
 				values ($1, $2)
-				returning "id";`
+				returning c_id;`
 	fmt.Println("script", script)
 
 	data, err := m.db.Query(script, project.Name, project.Description)
@@ -85,8 +85,8 @@ func (m *ProjectMapper) Change (project *entity.Project) error {
 	fmt.Println("ProjectMapper.Change ", project)
 
 	script :=	`update public.t_projects
-				set "name"=$1, "description"=$2
-				where "id"=$3;`
+				set c_name=$1, c_descriptionc_=$2
+				where c_id=$3;`
 	fmt.Println("script ", script)
 
 	_, err := m.db.Exec(script, project.Name, project.Description, project.Id)
@@ -103,7 +103,7 @@ func (m *ProjectMapper) Delete (id string) error {
 	fmt.Println("ProjectMapper.Delete ", id)
 
 	script :=	`delete FROM public.t_projects
-				where "id" = $1;`
+				where c_id = $1;`
 	fmt.Println("script", script)
 
 	_, err := m.db.Exec(script, id)

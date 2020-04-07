@@ -32,10 +32,10 @@ GET     /                                       App.Index
     DELETE     /employee/:id                       CEmployee.Delete
 
 
-#   GET        /group/:id                          CGroup.GetById
-#   PUT        /group/                             CGroup.Add
-#   POST       /group/:id                          CGroup.Change
-#   DELETE     /group/:id                          CGroup.Delete
+    GET        /group/:projectId                   CGroup.GetById
+    PUT        /group/:projectId/:employeeId       CGroup.Add
+#   POST       /group/:projectId/:employeeId       CGroup.Change
+    DELETE     /group/:projectId/:employeeId       CGroup.Remove
 
 
 

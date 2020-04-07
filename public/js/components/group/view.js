@@ -1,36 +1,79 @@
 //окнно просмотра проектной группы
 let workGroupWindow = {
-    show() {
+    show(projectId) {
         webix.ui({
             id: 'workGroupWindow',
             view: 'window', modal: true, move: true,
-            position: 'center', width: 600, height: 500,
+            position: 'center', width: 1200, height: 600,
             head:{
                 view:"toolbar", cols:[
-                    {view:"label", label: "проектная группа" },
+                    {view:"label", label: "редактирование проектных групп" },
                     {view:"button", label: 'закрыть', width: 100, align: 'right',
                         click:function(){ $$('workGroupWindow').close(); }
                     }
                 ]
             },
             body: {
-                rows: [
-                    {
-                        view: 'toolbar',
-                        cols: [
-                            {view: 'button', id: 'groupWorkerAddButton', value: 'добавить',},
-                            {view: 'button', id: 'groupWorkerRemoveButton', value: 'удалить'},
+                cols: [
+
+                    {rows: [
+                        {
+                            view: 'toolbar',
+                            cols: [
+                                {view: 'label', label: 'список сотрудников'},
+                            ]
+                        },
+                        {
+                            view: 'datatable', id: 'groupEmployeeList',
+                            autoconfig: true, select: 'row',
+                            columns: [
+                                {id: 'Id', adjust: true, fillspace: true},
+                                {id: 'Name', header:'имя', adjust: true, fillspace: true},
+                                {id: 'Surname', header:'Фамилия', adjust: true, fillspace: true},
+                            ]
+                        },
+                    ]},
+
+                    {view: 'toolbar', height: 700,
+                        rows: [
+                            {height: 160},
+                            {view: 'button', id: 'groupEmployeeAddButton', value: '=>', width: 100, height: 100,
+                                click: function() { groupComponent.EmployeeAdd(
+                                    $$('projectsTable').getSelectedItem().Id,
+                                    $$('groupEmployeeList').getSelectedItem().Id
+                                )}
+                            },
+                            {view: 'button', id: 'groupEmployeeRemoveButton', value: '<=', width: 100, height: 100,
+                                click: function() { groupComponent.EmployeeRemove(
+                                    $$('projectsTable').getSelectedItem().Id,
+                                    $$('workGroupTable').getSelectedItem().Id
+                                ) }
+                            },
                         ]
                     },
-                    {
-                        view: 'datatable', id: 'workGroupTable',
-                        autoconfig: true, select: 'row',
-                        columns: [
-                            {id: 'name', template: '#name#', adjust: true, fillspace: true},
-                        ]
-                    },
+
+                    {rows: [
+                        {
+                            view: 'toolbar', 
+                            cols: [
+                                {view: 'label', label: 'проектная группа'},
+                            ]
+                        },
+                        {
+                            view: 'datatable', id: 'workGroupTable',
+                            autoconfig: true, select: 'row',
+                            columns: [
+                                {id: 'Id', adjust: true, fillspace: true},
+                                {id: 'Name', header:'имя', adjust: true, fillspace: true},
+                                {id: 'Surname', header:'Фамилия', adjust: true, fillspace: true},
+                            ]
+                        },
+                    ]}
+
                 ]
             }
-        }).show()
+        })
+        groupComponent.GetAll(projectId)
+        $$('workGroupWindow').show()
     }
 }

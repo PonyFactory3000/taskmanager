@@ -23,7 +23,7 @@ func (m *TaskMapper) GetTaskStatusList() (*[]entity.TaskStatus, error) {
 
 	statusList := []entity.TaskStatus{}
 
-	script :=	`select * from public.t_task_status`
+	script :=	`select * from public.t_ref_status`
 	fmt.Println(script)
 
 	data, err := m.db.Query(script)
@@ -56,9 +56,9 @@ func (m *TaskMapper) GetAll(id string) (*[]entity.Task, error) {
 	tasks := []entity.Task{}
 
 	script :=	`select 
-				"id", "name", "description"
+				c_id, c_name, c_description
 				from public.t_tasks
-				where "fk_project" = $1`
+				where fk_project = $1`
 	fmt.Println("script", script, id)
 
 	//получение данных из базы
@@ -92,10 +92,10 @@ func (m *TaskMapper) Add (task *entity.Task, projectId string) error {
 	fmt.Println("TaskMapper.Add ", task)
 
 	script :=	`insert into public.t_tasks(
-				"name", "description",
-				"fk_project", "fk_status")
+				c_name, c_description,
+				fk_project, fk_status)
 				values ($1, $2, $3, $4)
-				returning "id";`
+				returning c_id;`
 	fmt.Println("script", script)
 
 	data, err := m.db.Query(script, task.Name, task.Description, projectId, 1)
@@ -121,8 +121,8 @@ func (m *TaskMapper) Change (task *entity.Task) error {
 	fmt.Println("TaskMapper.Change ", task)
 
 	script :=	`update public.t_tasks
-				set "name"=$1, "description"=$2
-				where "id"=$3;`
+				set c_name=$1, c_description=$2
+				where c_id=$3;`
 	fmt.Println("script ", script)
 
 	_, err := m.db.Exec(script, task.Name, task.Description, task.Id)
@@ -139,7 +139,7 @@ func (m *TaskMapper) Delete (id string) error {
 	fmt.Println("TaskMapper.Delete ", id)
 
 	script :=	`delete from public.t_tasks
-				where "id" = $1;`
+				where c_id = $1;`
 	fmt.Println("script", script)
 
 	_, err := m.db.Exec(script, id)

@@ -50,7 +50,7 @@ let projectsView = { width: 400, rows: [
         view: 'textarea', readonly: true,
     },
     {view: 'button', label: 'проектная группа', height: 40,
-        click: function(){ workGroupWindow.show(); }
+        click: function(){ workGroupWindow.show($$('projectsTable').getSelectedItem().Id); }
     },
 ] }
 

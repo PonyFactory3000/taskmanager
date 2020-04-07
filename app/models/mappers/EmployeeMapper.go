@@ -38,7 +38,7 @@ func (m *EmployeeMapper) GetAll() (*[]entity.Employee, error) {
 	for data.Next() {
 		employee := entity.Employee{}
 
-		err := data.Scan(&employee.Id, &employee.Name, &employee.Surname, &employee.Age, &employee.Post)
+		err := data.Scan(&employee.Id, &employee.Name, &employee.Surname, &employee.Post)
 		if err != nil {
 			fmt.Println("ScanErr", err)
 			return nil, err
@@ -57,12 +57,12 @@ func (m *EmployeeMapper) Add(employee *entity.Employee) error {
 	fmt.Println("EmployeeMapper.Add", employee)
 
 	script :=	`insert into public.t_employee(
-				"name", "surname", "age", "post")
-				values ($1, $2, $3, $4)
-				returning "id";`
+				c_name, c_surname, c_post)
+				values ($1, $2, $3)
+				returning c_id;`
 	fmt.Println("script", script)
 
-	data, err := m.db.Query(script, employee.Name, employee.Surname, employee.Age, employee.Post)
+	data, err := m.db.Query(script, employee.Name, employee.Surname, employee.Post)
 	if err != nil {
 		fmt.Println("ExecErr ", err)
 		return err
@@ -85,11 +85,11 @@ func (m *EmployeeMapper) Change(employee *entity.Employee) error {
 	fmt.Println("EmployeeMapper.Add", employee)
 
 	script :=	`update public.t_employee
-				set "name" = $1, "surname" = $2, "age" = $3, "post" = $4
-				where "id" = $5`
+				set c_name = $1, c_surname = $2,c_post = $3
+				where c_id = $4`
 	fmt.Println("script", script)
 
-	_, err := m.db.Exec(script, employee.Name, employee.Surname, employee.Age, employee.Post, employee.Id)
+	_, err := m.db.Exec(script, employee.Name, employee.Surname, employee.Post, employee.Id)
 	if err != nil {
 		fmt.Println("ExecErr ", err)
 		return err
@@ -103,7 +103,7 @@ func (m *EmployeeMapper) Delete(id string) error {
 	fmt.Println("EmployeeMapper.Add", id)
 
 	script :=	`delete from public.t_employee
-				where "id" = $1`
+				where c_id = $1`
 	fmt.Println("script", script)
 
 	_, err := m.db.Exec(script, id)

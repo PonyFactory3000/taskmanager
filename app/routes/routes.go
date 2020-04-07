@@ -157,6 +157,46 @@ func (_ tCEmployee) Delete(
 }
 
 
+type tCGroup struct {}
+var CGroup tCGroup
+
+
+func (_ tCGroup) BdConnOpen(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CGroup.BdConnOpen", args).URL
+}
+
+func (_ tCGroup) BdConnClose(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CGroup.BdConnClose", args).URL
+}
+
+func (_ tCGroup) GetById(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CGroup.GetById", args).URL
+}
+
+func (_ tCGroup) Add(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CGroup.Add", args).URL
+}
+
+func (_ tCGroup) Remove(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CGroup.Remove", args).URL
+}
+
+
 type tCProject struct {}
 var CProject tCProject
 
