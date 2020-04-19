@@ -71,28 +71,26 @@ let taskComponent = {
         $$('taskChangeWindow').close()
     },
 
-        //изменение задачи
-        Change() {
-            console.log("ChangeTask")
-            ProjectId = $$('projectsTable').getSelectedItem().Id
-            values = $$('taskChangeForm').getValues()
-            values.Id = parseInt(values.Id)
-            console.log("values", values)
-            taskModel.Change(values).then(result => {
-                console.log("result", result)
-
-                if (result.Result != 0) {
-                    console.log(result.ErrorText)
-                    webix.message(result.ErrorText)
-                    window.location = "/login"
-                }
-
-                $$("taskTable").remove($$("taskTable").getSelectedId())
-                $$("taskTable").add(result.Data)
-                $$('TaskDesArea').setValue("")
-            })
-            $$('taskChangeWindow').close()
-        },
+    //изменение задачи
+    Change() {
+        console.log("ChangeTask")
+        ProjectId = $$('projectsTable').getSelectedItem().Id
+        values = $$('taskChangeForm').getValues()
+        values.Id = parseInt(values.Id)
+        console.log("values", values)
+        taskModel.Change(values).then(result => {
+            console.log("result", result)
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+            $$("taskTable").remove($$("taskTable").getSelectedId())
+            $$("taskTable").add(result.Data)
+            $$('TaskDesArea').setValue("")
+        })
+        $$('taskChangeWindow').close()
+    },
     
         //удаление задачи
         Delete() {
