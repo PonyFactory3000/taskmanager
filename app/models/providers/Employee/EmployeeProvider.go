@@ -11,7 +11,7 @@ import (
 
 type EmployeeProvider struct {
 	mapper *mappers.EmployeeMapper
-	db *sql.DB
+	//db *sql.DB
 }
 
 func (p *EmployeeProvider) Init(db *sql.DB) error {

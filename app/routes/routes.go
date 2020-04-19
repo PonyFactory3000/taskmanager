@@ -109,6 +109,27 @@ func (_ tApp) Index(
 	return revel.MainRouter.Reverse("App.Index", args).URL
 }
 
+func (_ tApp) Login(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("App.Login", args).URL
+}
+
+func (_ tApp) Auth(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("App.Auth", args).URL
+}
+
+func (_ tApp) Logout(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("App.Logout", args).URL
+}
+
 
 type tCEmployee struct {}
 var CEmployee tCEmployee
@@ -119,13 +140,6 @@ func (_ tCEmployee) BdConnOpen(
 	args := make(map[string]string)
 	
 	return revel.MainRouter.Reverse("CEmployee.BdConnOpen", args).URL
-}
-
-func (_ tCEmployee) BdConnClose(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("CEmployee.BdConnClose", args).URL
 }
 
 func (_ tCEmployee) GetAll(
@@ -168,13 +182,6 @@ func (_ tCGroup) BdConnOpen(
 	return revel.MainRouter.Reverse("CGroup.BdConnOpen", args).URL
 }
 
-func (_ tCGroup) BdConnClose(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("CGroup.BdConnClose", args).URL
-}
-
 func (_ tCGroup) GetById(
 		) string {
 	args := make(map[string]string)
@@ -206,13 +213,6 @@ func (_ tCProject) BdConnOpen(
 	args := make(map[string]string)
 	
 	return revel.MainRouter.Reverse("CProject.BdConnOpen", args).URL
-}
-
-func (_ tCProject) BdConnClose(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("CProject.BdConnClose", args).URL
 }
 
 func (_ tCProject) GetAll(
@@ -253,13 +253,6 @@ func (_ tCTask) BdConnOpen(
 	args := make(map[string]string)
 	
 	return revel.MainRouter.Reverse("CTask.BdConnOpen", args).URL
-}
-
-func (_ tCTask) BdConnClose(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("CTask.BdConnClose", args).URL
 }
 
 func (_ tCTask) GetTaskStatusList(

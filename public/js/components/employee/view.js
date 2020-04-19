@@ -78,10 +78,12 @@ let employeeChangeWindow = {
                 view: 'form',
                 elements: [
                     {view: 'text', label: 'id', name: 'Id', hidden: true},
-                    {view: 'text', label: 'name', name: 'Name'},
-                    {view: 'text', label: 'surname', name: 'Surname'},
+                    {view: 'text', label: 'имя', name: 'Name'},
+                    {view: 'text', label: 'фамилия', name: 'Surname'},
                     // deleted {view: 'text', label: 'age', name: 'Age'},
-                    {view: 'text', label: 'post', name: 'Post'},
+                    {view: 'text', label: 'должность', name: 'Post'},
+                    // {view: 'text', label: 'логин', name: 'Login'},
+                    // {view: 'text', label: 'пароль', name: 'Password'},
                     { margin:5, cols:[
                         { id: 'employeeAddFormButton', view:"button", value:"добавить", hidden: true,
                             click: function() {

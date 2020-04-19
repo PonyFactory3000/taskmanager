@@ -8,44 +8,61 @@ import (
 	"fmt"
 	// "log"
 	// "encoding/json"
-	"database/sql"
+	// "database/sql"
 	_ "github.com/lib/pq"
 
 	"github.com/revel/revel"
+	"github.com/revel/revel/cache"
 )
 
 type CEmployee struct {
 	*revel.Controller
 	provider Employee.EmployeeProvider
-	db *sql.DB
+	//db *sql.DB
 }
 
 //интерцептор для подключения к БД
 func init() {
 	revel.InterceptMethod((*CEmployee).BdConnOpen, revel.BEFORE)
-	revel.InterceptMethod((*CEmployee).BdConnClose, revel.AFTER)
+	//revel.InterceptMethod((*CEmployee).BdConnClose, revel.AFTER)
 }
 
 //подключение к базе
 func (c *CEmployee) BdConnOpen() revel.Result {
 	fmt.Println("BdConnCreate")
-	connStr := "host=localhost port=5432 user=postgres password=123 dbname=taskmanager sslmode=disable"
-	var err error
-	c.db, err = sql.Open("postgres", connStr)
+
+	//получение токена
+	user := entity.User{}
+	token, err := c.Session.Get("Token")
 	if err != nil {
-		fmt.Println("OpenDB error", err)
-		return nil
+		return c.RenderJSON(helpers.Failed(err))
 	}
-	c.provider.Init(c.db)
+	user.Token = fmt.Sprintf("%v", token)
+
+	//получение подключения по токену
+	err = cache.Get("Token_"+user.Token, &user);
+	if err != nil {
+		return c.RenderJSON(helpers.Failed(err))
+	}
+
+	// connStr := "host=localhost port=5432 user=postgres password=123 dbname=taskmanager sslmode=disable"
+	// var err error
+	// c.db, err = sql.Open("postgres", connStr)
+	// if err != nil {
+	// 	fmt.Println("OpenDB error", err)
+	// 	return nil
+	// }
+
+	c.provider.Init(user.DB)
 	return nil
 }
 
 //закрытие подключения
-func (c *CEmployee) BdConnClose() revel.Result {
-	fmt.Println("BdConnDestroy")
-	c.db.Close()
-	return nil
-}
+// func (c *CEmployee) BdConnClose() revel.Result {
+// 	fmt.Println("BdConnDestroy")
+// 	c.db.Close()
+// 	return nil
+// }
 
 //получить список сотрудников
 func (c *CEmployee) GetAll() revel.Result {

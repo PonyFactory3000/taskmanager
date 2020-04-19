@@ -8,7 +8,9 @@ module:testrunner
 
 
 GET     /                                       App.Index
-
+GET     /login                                  App.Login
+POST    /auth                                   App.Auth
+GET     /logout                                 App.Logout
 
     GET        /project                            CProject.GetAll
 #   GET        /project/:id                        CProject.GetById

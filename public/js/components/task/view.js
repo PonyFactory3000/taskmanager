@@ -32,13 +32,19 @@ let tasksView = { minWidth: 300, rows: [
         id: 'taskTable',
         view: 'datatable', autoconfig: true, select: 'row',
         columns: [
-            {id: 'Id', adjust: true, fillspace: true},
+            {id: 'Id', adjust: true, fillspace: true, hidden: true},
             {id: 'Name', adjust: true, fillspace: true},
-            {id: 'Description', adjust: true, fillspace: true},
-        ]
+            {id: 'Description', adjust: true, fillspace: true, hidden: true},
+        ],
+        on:{
+            onItemClick: function() { 
+                $$('TaskDesArea').setValue($$('taskTable').getSelectedItem().Description)
+            }
+        },
     },
     { view: 'resizer'},
     { height: 139,
+        id: 'TaskDesArea',
         view: 'textarea', readonly: true,
     },
 ] }

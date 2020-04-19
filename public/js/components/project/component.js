@@ -5,6 +5,13 @@ let projectComponent = {
         console.log("GetAllProjects")
         projectModel.GetAll().then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('projectsTable').clearAll()
             result.Data.forEach(element => {
                 $$('projectsTable').add(element)
@@ -19,6 +26,13 @@ let projectComponent = {
         console.log("values", values)
         projectModel.Add(values).then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('projectsTable').add(result.Data)
         })
         $$('projectChangeWindow').close()
@@ -32,6 +46,16 @@ let projectComponent = {
         console.log("values", values)
         projectModel.Change(values).then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
+            $$("projectsTable").remove($$("projectsTable").getSelectedId())
+            $$("projectsTable").add(result.Data)
+            $$('ProjectDesArea').setValue("")
         })
         $$('projectChangeWindow').close()
     },
@@ -41,10 +65,17 @@ let projectComponent = {
         console.log("DeleteProject")
         id = $$('projectsTable').getSelectedItem().Id
         $$("projectsTable").remove($$("projectsTable").getSelectedId())
+        $$('ProjectDesArea').setValue("")
         $$('taskTable').clearAll()
         console.log(id)
         projectModel.Delete(id).then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
         })
     },
 

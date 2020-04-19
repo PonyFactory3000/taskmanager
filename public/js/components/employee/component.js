@@ -5,6 +5,13 @@ employeeComponent = {
         console.log('employeeGetAll')
         employeeModel.GetAll().then(result => {
             console.log('result', result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('employeeListTable').clearAll()
             result.Data.forEach(element => {
                 $$('employeeListTable').add(element)
@@ -20,6 +27,12 @@ employeeComponent = {
         console.log('values', values)
         employeeModel.Add(values).then(result => {
             console.log(result)
+
+            if (result.Result != 0) {
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('employeeListTable').add(result.Data)
         })
         $$('employeeChangeWindow').close()
@@ -34,6 +47,12 @@ employeeComponent = {
         console.log('values ',values)
         employeeModel.Change(values).then(result => {
             console.log(result)
+
+            if (result.Result != 0) {
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('employeeListTable').remove($$('employeeListTable').getSelectedId())
             $$('employeeListTable').add(result.Data)
         })
@@ -46,6 +65,12 @@ employeeComponent = {
         id = $$('employeeListTable').getSelectedItem().Id
         employeeModel.Delete(id).then(result => {
             console.log(result)
+
+            if (result.Result != 0) {
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+            
         })
         $$("employeeListTable").remove($$("employeeListTable").getSelectedId())
     }

@@ -122,8 +122,31 @@ func Register() {
 				Args: []*revel.MethodArg{ 
 				},
 				RenderArgNames: map[int][]string{ 
-					12: []string{ 
+					20: []string{ 
 					},
+				},
+			},
+			&revel.MethodType{
+				Name: "Login",
+				Args: []*revel.MethodArg{ 
+				},
+				RenderArgNames: map[int][]string{ 
+					24: []string{ 
+					},
+				},
+			},
+			&revel.MethodType{
+				Name: "Auth",
+				Args: []*revel.MethodArg{ 
+				},
+				RenderArgNames: map[int][]string{ 
+				},
+			},
+			&revel.MethodType{
+				Name: "Logout",
+				Args: []*revel.MethodArg{ 
+				},
+				RenderArgNames: map[int][]string{ 
 				},
 			},
 			
@@ -133,13 +156,6 @@ func Register() {
 		[]*revel.MethodType{
 			&revel.MethodType{
 				Name: "BdConnOpen",
-				Args: []*revel.MethodArg{ 
-				},
-				RenderArgNames: map[int][]string{ 
-				},
-			},
-			&revel.MethodType{
-				Name: "BdConnClose",
 				Args: []*revel.MethodArg{ 
 				},
 				RenderArgNames: map[int][]string{ 
@@ -186,13 +202,6 @@ func Register() {
 				},
 			},
 			&revel.MethodType{
-				Name: "BdConnClose",
-				Args: []*revel.MethodArg{ 
-				},
-				RenderArgNames: map[int][]string{ 
-				},
-			},
-			&revel.MethodType{
 				Name: "GetById",
 				Args: []*revel.MethodArg{ 
 				},
@@ -220,13 +229,6 @@ func Register() {
 		[]*revel.MethodType{
 			&revel.MethodType{
 				Name: "BdConnOpen",
-				Args: []*revel.MethodArg{ 
-				},
-				RenderArgNames: map[int][]string{ 
-				},
-			},
-			&revel.MethodType{
-				Name: "BdConnClose",
 				Args: []*revel.MethodArg{ 
 				},
 				RenderArgNames: map[int][]string{ 
@@ -267,13 +269,6 @@ func Register() {
 		[]*revel.MethodType{
 			&revel.MethodType{
 				Name: "BdConnOpen",
-				Args: []*revel.MethodArg{ 
-				},
-				RenderArgNames: map[int][]string{ 
-				},
-			},
-			&revel.MethodType{
-				Name: "BdConnClose",
 				Args: []*revel.MethodArg{ 
 				},
 				RenderArgNames: map[int][]string{ 

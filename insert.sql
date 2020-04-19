@@ -37,16 +37,9 @@ INSERT INTO t_tasks
 
 -- employee
 INSERT INTO t_employee
-    (c_name, c_surname, c_post)
-    VALUES ('Алёша', 'Попович', 'программист');
-
-INSERT INTO t_employee
-    (c_name, c_surname, c_post)
-    VALUES ('Илья', 'Муромец', 'программист');
-
-INSERT INTO t_employee
-    (c_name, c_surname, c_post)
-    VALUES ('Алексей', 'Петропавлов', 'программист');
+    (c_name, c_surname, c_post,
+    c_login, c_password)
+    VALUES ('', '', '', '', '');
 
 --group
 INSERT INTO t_project_employee

@@ -10,6 +10,13 @@ let taskComponent = {
         console.log("GetAllTasks")
         taskModel.GetTaskStatusList().then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             this.statusList.splice(0, this.statusList.length)
             result.Data.forEach(element => {
                 this.statusList.push({
@@ -29,7 +36,15 @@ let taskComponent = {
         id = $$('projectsTable').getSelectedItem().Id
         taskModel.GetAll(id).then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('taskTable').clearAll()
+            $$('TaskDesArea').setValue("")
             result.Data.forEach(element => {
                 $$('taskTable').add(element)
             })
@@ -44,6 +59,13 @@ let taskComponent = {
         id = $$('projectsTable').getSelectedItem().Id
         taskModel.Add(values, id).then(result => {
             console.log("result", result)
+
+            if (result.Result != 0) {
+                console.log(result.ErrorText)
+                webix.message(result.ErrorText)
+                window.location = "/login"
+            }
+
             $$('taskTable').add(result.Data)
         })
         $$('taskChangeWindow').close()
@@ -58,8 +80,16 @@ let taskComponent = {
             console.log("values", values)
             taskModel.Change(values).then(result => {
                 console.log("result", result)
+
+                if (result.Result != 0) {
+                    console.log(result.ErrorText)
+                    webix.message(result.ErrorText)
+                    window.location = "/login"
+                }
+
                 $$("taskTable").remove($$("taskTable").getSelectedId())
                 $$("taskTable").add(result.Data)
+                $$('TaskDesArea').setValue("")
             })
             $$('taskChangeWindow').close()
         },
@@ -70,9 +100,17 @@ let taskComponent = {
             ProjectId = $$('projectsTable').getSelectedItem().Id
             id = $$('taskTable').getSelectedItem().Id
             $$("taskTable").remove($$("taskTable").getSelectedId())
+            $$('TaskDesArea').setValue("")
             console.log(id, ProjectId)
             taskModel.Delete(id, ProjectId).then(result => {
                 console.log("result", result)
+
+                if (result.Result != 0) {
+                    console.log(result.ErrorText)
+                    webix.message(result.ErrorText)
+                    window.location = "/login"
+                }
+                
             })
         },
 

@@ -35,18 +35,20 @@ let projectsView = { width: 400, rows: [
         id: 'projectsTable',
         view: 'datatable',  select: 'row',
         columns: [
-            {id: 'Id', template: '#Id#', header:'Id', adjust: true, hidden: 0},
+            {id: 'Id', template: '#Id#', header:'Id', adjust: true, hidden: true},
             {id: 'Name', template: '#Name#', header:'имя', adjust: true, fillspace:1},
-            {id: 'Description', template: '#Description#', header:'Описание', adjust: true, fillspace:2},
+            {id: 'Description', template: '#Description#', header:'Описание', adjust: true, fillspace:2, hidden: true},
         ],
         on:{
             onItemClick: function() { 
-                taskComponent.GetAll() 
+                $$('ProjectDesArea').setValue($$('projectsTable').getSelectedItem().Description)
+                taskComponent.GetAll()
             }
         },
     },
     { view: 'resizer'},
     { height: 100,
+        id: 'ProjectDesArea',
         view: 'textarea', readonly: true,
     },
     {view: 'button', label: 'проектная группа', height: 40,

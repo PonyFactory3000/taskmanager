@@ -85,7 +85,7 @@ func (m *ProjectMapper) Change (project *entity.Project) error {
 	fmt.Println("ProjectMapper.Change ", project)
 
 	script :=	`update public.t_projects
-				set c_name=$1, c_descriptionc_=$2
+				set c_name=$1, c_description=$2
 				where c_id=$3;`
 	fmt.Println("script ", script)
 
