@@ -46,7 +46,7 @@ func (p *TaskProvider) Add (task *entity.Task, projectId string) error {
 
 //изменение задачи
 func (p *TaskProvider) Change (task *entity.Task) error {
-	fmt.Println("taskProvider.Change ", task)
+	fmt.Println("taskProvider.SetStatus ", task)
 
 	p.mapper.Change(task)
 	return nil
@@ -57,5 +57,12 @@ func (p *TaskProvider) Delete (id string) error {
 	fmt.Println("TaskProvider.Delete", id)
 
 	p.mapper.Delete(id)
+	return nil
+}
+
+func (p *TaskProvider) SetStatus (task *entity.Task) error {
+	fmt.Println("taskProvider.Change ", task)
+
+	p.mapper.SetStatus(task)
 	return nil
 }

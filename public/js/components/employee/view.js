@@ -47,7 +47,7 @@ let employeeListWindow = {
                         view: 'datatable', id: 'employeeListTable',
                         autoconfig: true, select: 'row',
                         columns: [
-                            {id: "Id", adjust: true, fillspace: true,},
+                            {id: "Id", adjust: true, fillspace: true, hidden: true},
                             {id: "Name", adjust: true, fillspace: true},
                             {id: "Surname", adjust: true, fillspace: true},
                             // deleted {id: "Age", adjust: true, fillspace: true},

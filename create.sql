@@ -7,41 +7,24 @@ CREATE TABLE t_projects
 (
     c_id SERIAL PRIMARY KEY,
     c_name VARCHAR(30) NOT NULL,
-    C_description VARCHAR(100)
+    C_description VARCHAR(200)
 );
 
 CREATE TABLE t_ref_status
 (
     c_id INTEGER PRIMARY KEY,
-    c_name VARCHAR(30) NOT NULL
+    c_name VARCHAR(30) NOT NULL,
+    UNIQUE (c_name)
 );
-
--- список статусов
--- (добавляю в базу вручную потому что psql не понимает кириллицу)
--- INSERT INTO t_ref_status
---     (c_id, c_name)
---     VALUES (1, 'новая');
--- INSERT INTO t_ref_status
---     (c_id, c_name)
---     VALUES (2, 'назначена');
--- INSERT INTO t_ref_status 
---     (c_id, c_name)
---     VALUES (3, 'в работе');
--- INSERT INTO t_ref_status 
---     (c_id, c_name)
---     VALUES (4, 'отложена');
--- INSERT INTO t_ref_status 
---     (c_id, c_name)
---     VALUES (5, 'завершена');
-
 
 CREATE TABLE t_tasks
 (
     c_id SERIAL PRIMARY KEY,
     fk_project INTEGER REFERENCES t_projects (c_id) ON DELETE CASCADE NOT NULL,
-    fk_status INTEGER REFERENCES t_ref_status (c_id) ON DELETE CASCADE DEFAULT 1,
+    fk_status VARCHAR(30) REFERENCES t_ref_status (c_name) ON DELETE CASCADE DEFAULT 'Новая',
+    fk_employee INTEGER REFERENCES t_employee (c_id) ON DELETE SET NULL,
     c_name VARCHAR(30) NOT NULL,
-    c_description VARCHAR(100)
+    c_description VARCHAR(200)
 );
 
 CREATE TABLE t_employee
@@ -64,3 +47,41 @@ CREATE TABLE t_users
     c_login VARCHAR(30) NOT NULL,
     c_password VARCHAR(30) NOT NULL
 )
+
+
+-- список статусов старый
+-- (добавляю в базу вручную потому что psql не понимает кириллицу)
+-- INSERT INTO t_ref_status
+--     (c_id, c_name)
+--     VALUES (1, 'новая');
+-- INSERT INTO t_ref_status
+--     (c_id, c_name)
+--     VALUES (2, 'назначена');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (3, 'в работе');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (4, 'отложена');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (5, 'завершена');
+
+
+-- список статусов новый
+-- (добавляю в базу вручную потому что psql не понимает кириллицу)
+-- INSERT INTO t_ref_status
+--     (c_id, c_name)
+--     VALUES (1, 'Новая');
+-- INSERT INTO t_ref_status
+--     (c_id, c_name)
+--     VALUES (2, 'Назначена');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (3, 'Отложена');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (4, 'Завершена');
+-- INSERT INTO t_ref_status 
+--     (c_id, c_name)
+--     VALUES (5, 'Отменена');

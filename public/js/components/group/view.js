@@ -27,7 +27,7 @@ let workGroupWindow = {
                             view: 'datatable', id: 'groupEmployeeList',
                             autoconfig: true, select: 'row',
                             columns: [
-                                {id: 'Id', adjust: true, fillspace: true},
+                                {id: 'Id', adjust: true, fillspace: true, hidden: true},
                                 {id: 'Name', header:'имя', adjust: true, fillspace: true},
                                 {id: 'Surname', header:'Фамилия', adjust: true, fillspace: true},
                             ]
@@ -63,7 +63,7 @@ let workGroupWindow = {
                             view: 'datatable', id: 'workGroupTable',
                             autoconfig: true, select: 'row',
                             columns: [
-                                {id: 'Id', adjust: true, fillspace: true},
+                                {id: 'Id', adjust: true, fillspace: true, hidden: true},
                                 {id: 'Name', header:'имя', adjust: true, fillspace: true},
                                 {id: 'Surname', header:'Фамилия', adjust: true, fillspace: true},
                             ]

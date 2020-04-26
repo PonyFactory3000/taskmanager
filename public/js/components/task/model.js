@@ -57,4 +57,17 @@ let taskModel = {
             },
         }).then(response => response.json())
     },
+
+    SetStatus(values, projectId) {
+        console.log("setStatus  ", values, "  ", projectId)
+        let url = '/project/' + projectId + '/task/' + values.Id + '/status'
+        let method = 'POST'
+        return fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(values)
+        }).then(response => response.json())
+    },
 }

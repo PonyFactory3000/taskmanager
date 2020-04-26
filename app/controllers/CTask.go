@@ -120,3 +120,16 @@ func (c *CTask) Delete() revel.Result {
 
 	return c.RenderJSON(helpers.Success(id))
 }
+
+//изменить задачу
+func (c *CTask) SetStatus() revel.Result {
+	fmt.Println("CTask.SetStatus")
+	
+	task := entity.Task{}
+	c.Params.BindJSON(&task)
+	fmt.Println("task ", task)
+
+	c.provider.SetStatus(&task)
+
+	return c.RenderJSON(helpers.Success(&task))
+}

@@ -51,8 +51,14 @@ let projectsView = { width: 400, rows: [
         id: 'ProjectDesArea',
         view: 'textarea', readonly: true,
     },
-    {view: 'button', label: 'проектная группа', height: 40,
-        click: function(){ workGroupWindow.show($$('projectsTable').getSelectedItem().Id); }
+    {
+        //нижние кнопки
+        view: 'toolbar',
+        cols: [
+            {view: 'button', label: 'проектная группа', height: 40,
+                click: function(){ workGroupWindow.show($$('projectsTable').getSelectedItem().Id); }
+            },
+        ]
     },
 ] }
 
@@ -77,7 +83,7 @@ let projectChangeWindow = {
                 id: 'projectChangeForm',
                 view: 'form',
                 elements: [
-                    {view: 'text', label: 'Id', name: 'Id'},
+                    {view: 'text', label: 'Id', name: 'Id', hidden: true},
                     {view: 'text', label: 'Название', name: 'Name'},
                     {view: 'textarea', label: 'Описание', name: 'Description', height: 100},
                     { margin:5, cols:[

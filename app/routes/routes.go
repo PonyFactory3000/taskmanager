@@ -290,4 +290,11 @@ func (_ tCTask) Delete(
 	return revel.MainRouter.Reverse("CTask.Delete", args).URL
 }
 
+func (_ tCTask) SetStatus(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("CTask.SetStatus", args).URL
+}
+
 

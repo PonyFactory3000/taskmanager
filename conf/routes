@@ -19,11 +19,12 @@ module:testrunner
     DELETE     /project/:id                        CProject.Delete
 
 
-    GET        /taskStatus                         CTask.GetTaskStatusList
+#   GET        /taskStatus                         CTask.GetTaskStatusList
     GET        /project/:projectId/task            CTask.GetAll
 #   GET        /project/:projectId/task/:id        CTask.GetById
     PUT        /project/:projectId/task            CTask.Add
     POST       /project/:projectId/task/:id        CTask.Change
+    POST       /project/:projectId/task/:id/status CTask.SetStatus
     DELETE     /project/:projectId/task/:id        CTask.Delete
 
 

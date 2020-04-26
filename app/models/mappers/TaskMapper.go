@@ -56,8 +56,10 @@ func (m *TaskMapper) GetAll(id string) (*[]entity.Task, error) {
 	tasks := []entity.Task{}
 
 	script :=	`select 
-				c_id, c_name, c_description
-				from public.t_tasks
+				t_tasks.c_id, t_tasks.c_name, t_tasks.c_description, t_tasks.fk_status, t_tasks.fk_employee,
+				t_employee.c_name, t_employee.c_surname
+				from t_tasks
+				left JOIN t_employee ON t_employee.c_id=t_tasks.fk_employee
 				where fk_project = $1`
 	fmt.Println("script", script, id)
 
@@ -73,7 +75,7 @@ func (m *TaskMapper) GetAll(id string) (*[]entity.Task, error) {
 	for data.Next() {
 		task := entity.Task{}
 
-		err := data.Scan(&task.Id, &task.Name, &task.Description)
+		err := data.Scan(&task.Id, &task.Name, &task.Description, &task.Status, &task.EmployeeId, &task.EmployeeName, &task.EmployeeSurname)
 		if err != nil {
 			fmt.Println("ScanErr", err)
 			return nil, err
@@ -95,17 +97,17 @@ func (m *TaskMapper) Add (task *entity.Task, projectId string) error {
 				c_name, c_description,
 				fk_project, fk_status)
 				values ($1, $2, $3, $4)
-				returning c_id;`
+				returning c_id, c_name, c_description, fk_status, fk_employee;`
 	fmt.Println("script", script)
 
-	data, err := m.db.Query(script, task.Name, task.Description, projectId, 1)
+	data, err := m.db.Query(script, task.Name, task.Description, projectId, "Новая")
 	if err != nil {
 		fmt.Println("ExecErr ", err)
 		return err
 	}
 	
 	for data.Next() {
-		err = data.Scan(&task.Id)
+		err = data.Scan(&task.Id, &task.Name, &task.Description, &task.Status, &task.EmployeeId)
 		if err != nil {
 			fmt.Println("ScanErr", err)
 			return err
@@ -126,6 +128,23 @@ func (m *TaskMapper) Change (task *entity.Task) error {
 	fmt.Println("script ", script)
 
 	_, err := m.db.Exec(script, task.Name, task.Description, task.Id)
+	if err != nil {
+		fmt.Println("ExecErr ", err)
+		return err
+	}
+	
+	return nil
+}
+
+func (m *TaskMapper) SetStatus (task *entity.Task) error {
+	fmt.Println("TaskMapper.SetStatus ", task)
+
+	script :=	`update public.t_tasks
+				set fk_status=$1, fk_employee=$2
+				where c_id=$3;`
+	fmt.Println("script ", script)
+
+	_, err := m.db.Exec(script, task.Status, task.EmployeeId, task.Id)
 	if err != nil {
 		fmt.Println("ExecErr ", err)
 		return err
